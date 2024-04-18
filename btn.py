@@ -386,6 +386,8 @@ def banner_without_offset():
     name = 'BHARTI VIDYAPEETH COLLEGE OF ENGINEERING PLACEMENT'
     cv2.putText(final,name,(wplace,hplace),cv2.FONT_HERSHEY_SIMPLEX,.7,(0,0,0),2)
     cv2.imwrite(f'{folder}/offset.png',final)
+    cv2.imshow('Banner',final)
+    cv2.waitKey(0)
 
 
 
@@ -454,17 +456,6 @@ def get_input_data(e):
             key = cv2.waitKey(1)
             cv2.imwrite(f'{folder}/{fullname}.png',cardResize)
 
-    
-
-
-# def add_to_database():
-#     con = sqlite3.connect(database=r'banner.db')
-#     cur = con.cursor()
-    
-#     try:
-#         if
-#     except Exception as ex:
-#         messagebox.showerror("Error",f'Error due to : {str(ex)}')
 
 
 def return_form_button():
@@ -504,8 +495,6 @@ def return_form_button():
 # def handle_loaded_file(e:flet.FilePickerResultEvent):
 #     print(e.files)
 # file_picker = flet.FilePicker(on_result=handle_loaded_file)
-
-
 
 # def select_image_button():
 #     return Container(

@@ -20,7 +20,6 @@ class AppDataTable(UserControl):
                     border=border.all(2,'#ebebeb'),
                     horizontal_lines=border.BorderSide(1,'#ebebeb'),
                     columns=[
-                    
                         DataColumn(
                             Text(
                                 "Student Name",

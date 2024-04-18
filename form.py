@@ -45,11 +45,12 @@ class AppForm(UserControl):
         )
     
     
-    
-
-
     def build(self):
         self.app_form_input_instance(),
+        def handle_loaded_file( e:flet.FilePickerResultEvent):
+            print(e.files)
+        file_picker = flet.FilePicker(on_result=handle_loaded_file)
+        
         
         return Container(
             expand=True,
@@ -64,7 +65,6 @@ class AppForm(UserControl):
                     Row(
                         controls=[
                             self.app_form_input_field('Enter Name FirstName-Surname',True),
-                            # select_image_button()
                         ],
                         
                     ),
