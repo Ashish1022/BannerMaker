@@ -3,17 +3,19 @@ from flet import *
 from header import AppHeader
 from form import AppForm
 from data_table import AppDataTable
-from btn import banner_without_offset
+from btn import banner_without_offset,add_image
+
 
 
 
 def main(page :Page):
     page.bgcolor = "#dfdfdf"
     page.padding = 20
-    def handle_loaded_file( e:flet.FilePickerResultEvent):
-            print(e.files)
-    file_picker = flet.FilePicker(on_result=handle_loaded_file)
-    page.overlay.append(file_picker)
+    # def handle_loaded_file( e:flet.FilePickerResultEvent):
+    #         print(e.files)
+    # file_picker = flet.FilePicker(on_result=handle_loaded_file)
+    # page.overlay.append(file_picker)
+    
     page.add(
         Column(
             expand=True,
@@ -31,38 +33,7 @@ def main(page :Page):
                     ]
                 ),
                 Divider(height=2,color='transparent'),
-                Container(
-                    alignment=alignment.center,
-                    content=ElevatedButton(
-                    on_click=lambda _:file_picker.pick_files(allow_multiple=False,allowed_extensions=['jpg','png','jpeg']),
-                    bgcolor='#081d33',
-                    color='white',
-                    content=Row(
-                        controls=[
-                            Icon(
-                                name=icons.ADD_ROUNDED,
-                                size=12,
-                            ),
-                            Text(
-                                "Select Photo",
-                                size=11,
-                                weight='bold'
-                            ),
-                        ],
-                    ),
-                    style=ButtonStyle(
-                            shape={
-                                "":RoundedRectangleBorder(radius=6),
-                            },
-                            color={
-                                "":'white',
-                            },
-                        ),
-                    
-                    ),
-                    height=42,
-                    width=220,
-                ),
+                
                 ElevatedButton(
                     on_click=lambda e: banner_without_offset(),
                     bgcolor='#081d33',
@@ -75,6 +46,34 @@ def main(page :Page):
                             ),
                             Text(
                                 "Make Banner",
+                                size=11,
+                                weight='bold'
+                            ),
+                        ],
+                    ),
+                    style=ButtonStyle(
+                        shape={
+                            "":RoundedRectangleBorder(radius=6),
+                        },
+                        color={
+                            "":'white',
+                        },
+                    ),
+                    height=42,
+                    width=220,
+                ),
+                ElevatedButton(
+                    on_click=lambda e: add_image(),
+                    bgcolor='#081d33',
+                    color='white',
+                    content=Row(
+                        controls=[
+                            Icon(
+                                name=icons.ADD_ROUNDED,
+                                size=12,
+                            ),
+                            Text(
+                                "Show Banner",
                                 size=11,
                                 weight='bold'
                             ),

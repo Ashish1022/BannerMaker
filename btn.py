@@ -8,12 +8,15 @@ import os
 import numpy as np
 from PIL import Image 
 
+
 def banner_without_offset():
     folder = 'banner'
     card = cv2.imread('imgs/mainCard2.png')
     cardResize = cv2.resize(card,(260,400))
     images = os.listdir('finalCard')
+    
     image_objects = [cv2.imread(f'finalCard/{filename}') for filename in images]
+    
 
 
     len_image_objects = len(image_objects)
@@ -22,7 +25,7 @@ def banner_without_offset():
     if(len_image_objects==1):
         h_stack1 = np.hstack(image_objects[0])
         v_stack = np.vstack([h_stack1])
-        cv2.imshow("Collage",v_stack)
+        # cv2.imshow("Collage",v_stack)
         # cv2.waitKey(0)
         cv2.imwrite(f'{folder}/offset.png',v_stack)
 
@@ -53,9 +56,11 @@ def banner_without_offset():
         cv2.imwrite(f'{folder}/offset.png',v_stack)
 
     elif(len_image_objects==6):
-        h_stack1 = np.hstack(image_objects[0],image_objects[1],image_objects[4])
-        h_stack2 = np.hstack(image_objects[2],image_objects[3],image_objects[5])
+        h_stack1 = np.hstack([image_objects[0],image_objects[1],image_objects[4]])
+        h_stack2 = np.hstack([image_objects[2],image_objects[3],image_objects[5]])
         v_stack = np.vstack([h_stack1,h_stack2])
+
+
 
         cv2.imwrite(f'{folder}/offset.png',v_stack)
 
@@ -386,17 +391,14 @@ def banner_without_offset():
     name = 'BHARTI VIDYAPEETH COLLEGE OF ENGINEERING PLACEMENT'
     cv2.putText(final,name,(wplace,hplace),cv2.FONT_HERSHEY_SIMPLEX,.7,(0,0,0),2)
     cv2.imwrite(f'{folder}/offset.png',final)
-    cv2.imshow('Banner',final)
+    # cv2.imshow('Banner',final)
     cv2.waitKey(0)
-
-
 
 control_map = return_control_refrence()
 
 def update_text(e):
     e.control.content.controls[0].read_only = False
     e.control.content.controls[0].update()
-
 
 def get_input_data(e):
     for key,value in control_map.items():
@@ -406,7 +408,7 @@ def get_input_data(e):
             for user_input in value.controls[0].content.controls[0].controls[:]:
                 folder = 'finalCard'
 
-                card = cv2.imread('imgs/mainCard1.png')
+                card = cv2.imread('imgs/mainCard3.png')
                 cardResize = cv2.resize(card,(260,400)) 
                 
                 data.cells.append(
@@ -492,38 +494,146 @@ def return_form_button():
     )
 
 
-# def handle_loaded_file(e:flet.FilePickerResultEvent):
-#     print(e.files)
-# file_picker = flet.FilePicker(on_result=handle_loaded_file)
 
-# def select_image_button():
-#     return Container(
-#         alignment=alignment.center,
-#         content=ElevatedButton(
-#             on_click=lambda _:file_picker.pick_files(allow_multiple=False,allowed_extensions=['jpg','png','jpeg']),
-#             bgcolor='#081d33',
-#             color='white',
-#             content=Row(
-#                 controls=[
-#                     Icon(
-#                         name=icons.ADD_ROUNDED,
-#                         size=12,
-#                     ),
-#                     Text(
-#                         "Select Photo",
-#                         size=11,
-#                         weight='bold'
-#                     ),
-#                 ],
-#             ),
-#             style=ButtonStyle(
-#                 shape={
-#                     "":RoundedRectangleBorder(radius=6),
-#                 },
-#                 color={
-#                     "":'white',
-#                 },
-#             ),
-#         )
-#     )
+#****************Image section
+# def add_images():
+#     for key,value in control_map.items():
+#         if key == "AppForm":
+#             data = DataRow(cells=[])
 
+#             for user_input in value.controls[0].content.controls[0].controls[:]:
+#                 folder = 'finalCard'
+
+#                 card = cv2.imread('imgs/mainCard3.png')
+#                 cardResize = cv2.resize(card,(260,400)) 
+                
+#                 data.cells.append(
+#                     DataCell(
+#                         FormHelper(user_input.content.controls[1].value),
+#                         on_double_tap=lambda e: update_text(e)
+#                     )
+#                 )
+#                 print(user_input.content.controls[1].value)
+#                 fullname = user_input.content.controls[1].value
+                
+#                 images = os.listdir('finalCard')
+#                 image_objects = [Image.open(f'photos/{filename}') for filename in images]
+#                 image_objects_len = len(image_objects)
+#                 print(image_objects_len)
+                
+#                 card = os.listdir('photos')
+#                 card_objects = [Image.open(f'finalCard/{filename}') for filename in card]
+#                 card_objects_len = len(card_objects)
+#                 print(card_objects_len)
+                
+#                 for i in range(0,image_objects_len):
+#                     if image_objects[i] == card_objects[i]:
+#                         img1 = Image.open(f'{r"finalCard/{card_objects[i]}.png"}')
+#                         img2 = Image.open(f'{r"photos/image_objects[i].jpg"}') 
+#                         Image.Image.paste(img1, img2, (60, 70))
+                
+#                         img1.show()
+                        
+                        
+# def add_imagesss():
+#     images = os.listdir('photos')
+#     image_objects = [Image.open(f'photos/{filename}') for filename in images]
+#     image_objects_len = len(image_objects)
+#     # print(image_objects_len)
+#     # print(image_objects)
+#     print(images)
+    
+                
+#     card = os.listdir('finalCard')
+#     card_objects = [Image.open(f'finalCard/{filename}') for filename in card]
+#     card_objects_len = len(card_objects)
+#     # print(card_objects_len)
+#     # print(card_objects)
+                
+    
+#     if card_objects_len == 10:
+        
+#         Ashishp = Image.open(r"photos/Ashish.png") 
+#         Abhimanyup = Image.open(r"photos/Abhimanyu.png") 
+#         Adityap = Image.open(r"photos/Aditya.png") 
+#         Chiragp = Image.open(r"photos/Chirag.png") 
+#         Deepp = Image.open(r"photos/Deep.png") 
+#         Kankalp = Image.open(r"photos/Kankal.png") 
+#         Paramp = Image.open(r"photos/Param.png") 
+#         Shreep = Image.open(r"photos/Shree.png") 
+#         Vedantp = Image.open(r"photos/Vedant.png") 
+#         Vigneshp = Image.open(r"photos/Vignesh.png") 
+        
+#         Ashishpc = Image.open(r"finalCard/Ashish.png") 
+#         Abhimanyuc = Image.open(r"finalCard/Abhimanyu.png") 
+#         Adityac = Image.open(r"finalCard/Aditya.png") 
+#         Chiragc = Image.open(r"finalCard/Chirag.png") 
+#         Deepc = Image.open(r"finalCard/Deep.png") 
+#         Kankalc = Image.open(r"finalCard/Kankal.png") 
+#         Paramc = Image.open(r"finalCard/Param.png") 
+#         Shreec = Image.open(r"finalCard/Shree.png") 
+#         Vedantc = Image.open(r"finalCard/Vedant.png") 
+#         Vigneshc = Image.open(r"finalCard/Vignesh.png") 
+        
+#         Image.Image.paste(Ashishpc, Ashishp, (146, 165))
+#         Image.Image.paste(Abhimanyuc, Abhimanyup, (146, 165))
+#         Image.Image.paste(Adityac, Adityap, (146, 165))
+#         Image.Image.paste(Chiragc, Chiragp, (146, 165))
+#         Image.Image.paste(Deepc, Deepp, (146, 165))
+#         Image.Image.paste(Kankalp, Kankalc, (146, 165))
+#         Image.Image.paste(Paramc, Paramp, (146, 165))
+#         Image.Image.paste(Shreec, Shreep, (146, 165))
+#         Image.Image.paste(Vedantc, Vedantp, (146, 165))
+#         Image.Image.paste(Vigneshc, Vigneshp, (146, 165))
+        
+#         Ashishpc.show()
+#         Ashishpc.save(f'finalCards/{Ashishpc}.png')
+#         Abhimanyuc.show()
+#         Abhimanyuc.save(f'finalCards/{Abhimanyuc}.png')
+#         Adityac.show()
+#         Adityac.save(f'finalCards/{Adityac}.png')
+#         Deepc.show()
+#         Deepc.save(f'finalCards/{Deepc}.png')
+#         Kankalp.show()
+#         Kankalp.save(f'finalCards/{Kankalp}.png')
+#         Paramc.show()
+#         Paramc.save(f'finalCards/{Paramc}.png')
+#         Shreec.show()
+#         Shreec.save(f'finalCards/{Shreec}.png')
+#         Vedantc.show()
+#         Vedantc.save(f'finalCards/{Vedantc}.png')
+#         Vigneshc.show()
+#         Vigneshc.save(f'finalCards/{Vigneshc}.png')
+#         Chiragc.show()
+#         Chiragc.save(f'finalCards/{Chiragc}.png')
+                
+                
+def add_image():
+    
+    img1 = Image.open(r"banner/offset.png") 
+  
+    img2 = Image.open(r"photos/Aditya.png") 
+    img3 = Image.open(r"photos/Aryan.png") 
+    img4 = Image.open(r"photos/Ashish.png") 
+    img5 = Image.open(r"photos/Bhushan.png") 
+    img6 = Image.open(r"photos/Kartik.png") 
+    img7 = Image.open(r"photos/Sanika.png") 
+    img8 = Image.open(r"photos/Sejal.png") 
+    img9 = Image.open(r"photos/Shree.png") 
+    img10 = Image.open(r"photos/Shreyash.png") 
+    img11 = Image.open(r"photos/Sumedh.png") 
+    
+    # img1.paste(img2, (0,0), mask=img2) 
+    Image.Image.paste(img1, img2, (60, 70))
+    Image.Image.paste(img1, img3, (320, 70))
+    Image.Image.paste(img1, img4, (580, 70))
+    Image.Image.paste(img1, img5, (840, 70))
+    Image.Image.paste(img1, img6, (1100, 70))
+    Image.Image.paste(img1, img7, (60, 470))
+    Image.Image.paste(img1, img8, (320, 470))
+    Image.Image.paste(img1, img9, (580, 470))
+    Image.Image.paste(img1, img10, (840, 470))
+    Image.Image.paste(img1, img11, (1100, 470))
+    img1.save('final/final.png')
+    img1.show()
+                
